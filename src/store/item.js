@@ -63,8 +63,8 @@ const actions = {
     return data.nextId
   },
   identifierExists: async (identifier) => {
-    const data = await serverFetch('query { getItemByIdentifier(identifier: "' + identifier + `") { 
-      id 
+    const data = await serverFetch('query { getItemByIdentifier(identifier: "' + identifier + `") {
+      id
     } }`)
     if (data.getItemByIdentifier) {
       return true
@@ -73,9 +73,9 @@ const actions = {
     }
   },
   loadItemByIdentifier: async (identifier, skipError) => {
-    const item = await serverFetch('query { getItemByIdentifier(identifier: "' + identifier + `") { 
-      id 
-      path 
+    const item = await serverFetch('query { getItemByIdentifier(identifier: "' + identifier + `") {
+      id
+      path
       identifier
       parentIdentifier
       name
@@ -96,15 +96,15 @@ const actions = {
     return enrichItem(item.getItemByIdentifier)
   },
   loadItemChannels: async (identifier) => {
-    const item = await serverFetch('query { getItemByIdentifier(identifier: "' + identifier + `") { 
+    const item = await serverFetch('query { getItemByIdentifier(identifier: "' + identifier + `") {
       channels
     } }`)
     return item.getItemByIdentifier.channels
   },
   loadItemsByIds: async (arr, enrich) => {
-    const res = await serverFetch('query { getItemsByIds(ids: [' + arr + `]) { 
-      id 
-      path 
+    const res = await serverFetch('query { getItemsByIds(ids: [' + arr + `]) {
+      id
+      path
       parentIdentifier
       identifier
       name
@@ -126,9 +126,9 @@ const actions = {
   loadItemsByIdsForImport: async (arr, loadMainImages, enrich) => {
     if (!arr || arr.length === 0) return []
 
-    const res = await serverFetch('query { getItemsByIds(ids: [' + arr + `]) { 
-      id 
-      path 
+    const res = await serverFetch('query { getItemsByIds(ids: [' + arr + `]) {
+      id
+      path
       identifier
       name
       typeId
@@ -184,11 +184,11 @@ const actions = {
       order = 'order:' + objectToGraphgl(sort)
     }
 
-    const data = await serverFetch('query { getItems(parentId: "' + (parentId || '') + '", offset: 0, limit: 500, ' + order + `) { 
-      rows 
-      { 
-        id 
-        path 
+    const data = await serverFetch('query { getItems(parentId: "' + (parentId || '') + '", offset: 0, limit: 500, ' + order + `) {
+      rows
+      {
+        id
+        path
         identifier
         name
         typeId
@@ -218,11 +218,11 @@ const actions = {
       const tst = type.options.find(elem => elem.name === 'relChildrenSort')
       if (tst) sort = tst.value
     }
-    const data = await serverFetch('query { getItemRelationsChildren(itemId: "' + (parentId || '') + '", offset: 0, limit: 500 ' + (sort ? 'sort:"' + sort + '"' : '') + `) { 
-      rows 
-      { 
-        id 
-        path 
+    const data = await serverFetch('query { getItemRelationsChildren(itemId: "' + (parentId || '') + '", offset: 0, limit: 500 ' + (sort ? 'sort:"' + sort + '"' : '') + `) {
+      rows
+      {
+        id
+        path
         identifier
         name
         typeId
@@ -250,11 +250,11 @@ const actions = {
   loadChildren: async (parentId, options) => {
     const offset = (options.page - 1) * options.itemsPerPage
     const order = generateSorting(options)
-    const data = await serverFetch('query { getItems(parentId: "' + (parentId || '') + '", offset: ' + offset + ', limit: ' + options.itemsPerPage + ', order: ' + objectToGraphgl(order) + `) { 
+    const data = await serverFetch('query { getItems(parentId: "' + (parentId || '') + '", offset: ' + offset + ', limit: ' + options.itemsPerPage + ', order: ' + objectToGraphgl(order) + `) {
       count,
-      rows 
-      { 
-        id 
+      rows
+      {
+        id
         identifier
         parentIdentifier
         typeIdentifier
@@ -325,8 +325,8 @@ const actions = {
     item.channels = itemData.channels
   },
   reloadItem: async (item) => {
-    const data = await serverFetch('query { getItem(id: ' + item.internalId + `) { 
-      name, values, channels 
+    const data = await serverFetch('query { getItem(id: ' + item.internalId + `) {
+      name, values, channels
     } }`)
     if (data.getItem) {
       const itemData = data.getItem
@@ -337,7 +337,7 @@ const actions = {
   },
   moveItem: async (item, parentId) => {
     const query = `
-      mutation { moveItem(id: "` + item.internalId + '", parentId: "' + parentId + `") { 
+      mutation { moveItem(id: "` + item.internalId + '", parentId: "' + parentId + `") {
         path
         name
         values
@@ -362,7 +362,7 @@ const actions = {
 
     const idToRemove = node ? node.internalId : id
     const query = `
-      mutation { removeItem(id: "` + idToRemove + `") 
+      mutation { removeItem(id: "` + idToRemove + `")
     }`
     const resp = await serverFetch(query)
     if (resp.removeItem) removeNodeByInternalId(id, itemsTree)
@@ -375,7 +375,7 @@ const actions = {
     data.append('file', file)
     data.append('id', id)
 
-    const resp = await fetch((window.location.href.indexOf('localhost') >= 0 ? process.env.VUE_APP_DAM_URL : window.OPENPIM_SERVER_URL + '/') + 'asset-upload', {
+    const resp = await fetch((window.location.href.indexOf('localhost') >= 0 ? process.env.VUE_APP_DAM_URL : process.env.VUE_APP_SERVER_URL + '/') + 'asset-upload', {
       method: 'POST',
       headers: {
         'x-token': localStorage.getItem('token')
@@ -400,7 +400,7 @@ const actions = {
     data.append('fileName', fileName)
     data.append('fileIdentifier', fileIdentifier)
 
-    const resp = await fetch((window.location.href.indexOf('localhost') >= 0 ? process.env.VUE_APP_DAM_URL : window.OPENPIM_SERVER_URL + '/') + 'asset-create-upload', {
+    const resp = await fetch((window.location.href.indexOf('localhost') >= 0 ? process.env.VUE_APP_DAM_URL : process.env.VUE_APP_SERVER_URL + '/') + 'asset-create-upload', {
       method: 'POST',
       headers: {
         'x-token': localStorage.getItem('token')
@@ -421,7 +421,7 @@ const actions = {
     await serverFetch(query)
   },
   loadAssets: async (id) => {
-    const data = await serverFetch('query { getAssets(id: "' + id + `") { 
+    const data = await serverFetch('query { getAssets(id: "' + id + `") {
       id
       typeId
       identifier
@@ -438,7 +438,7 @@ const actions = {
   },
   loadThumbnails: async (ids) => {
     if (!ids || ids.length === 0) return []
-    const data = await serverFetch('query { getMainImages(ids: [' + ids + `]) { 
+    const data = await serverFetch('query { getMainImages(ids: [' + ids + `]) {
       itemId
       id
       identifier
@@ -461,8 +461,8 @@ const actions = {
       `query { search(
         requests: [
             {
-                entity: ITEM, 
-                offset: 0, 
+                entity: ITEM,
+                offset: 0,
                 limit: 100,
                 where: ` + andExpr + '{OP_or: [' + attrExpr + mainExpr + '] }' + (andExpr ? ']}' : '') + `,
                 order: [["\\"typeId\\"", "ASC"],["id", "ASC"]]
@@ -478,7 +478,7 @@ const actions = {
                     values
                 }
             }
-        }}}       
+        }}}
       `)
     data.search.responses[0].rows = data.search.responses[0].rows.map(row => {
       let type = findType(row.typeId).node
@@ -504,8 +504,8 @@ const actions = {
       `query { search(
         requests: [
             {
-                entity: ITEM, 
-                offset: ` + offset + `, 
+                entity: ITEM,
+                offset: ` + offset + `,
                 limit: ` + options.itemsPerPage + `,
                 where: ` + objectToGraphgl(where) + `,
                 order: ` + objectToGraphgl(order) + `
@@ -515,7 +515,7 @@ const actions = {
             ... on ItemsSearchResponse {
                 count
                 rows {
-                  id 
+                  id
                   identifier
                   parentIdentifier
                   typeIdentifier
@@ -532,7 +532,7 @@ const actions = {
                   updatedAt
                 }
             }
-        }}}       
+        }}}
       `)
     const res = data.search.responses[0]
     if (res.count <= options.itemsPerPage && res.rows.length !== res.count) {
@@ -562,7 +562,7 @@ const actions = {
         id
         errors { code message }
         warnings { code message }
-      }}}    
+      }}}
     `
     const data = await serverFetch(query)
     return data.import.items

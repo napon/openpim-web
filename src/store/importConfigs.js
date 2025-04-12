@@ -56,7 +56,7 @@ const actions = {
     importConfigs.splice(idx, 1)
   },
   getImportConfigTemplateData: async (id) => {
-    const resp = await fetch((window.location.href.indexOf('localhost') >= 0 ? process.env.VUE_APP_DAM_URL : window.OPENPIM_SERVER_URL + '/') + 'import-config-data/' + id, {
+    const resp = await fetch((window.location.href.indexOf('localhost') >= 0 ? process.env.VUE_APP_DAM_URL : process.env.VUE_APP_SERVER_URL + '/') + 'import-config-data/' + id, {
       method: 'GET',
       headers: {
         'x-token': localStorage.getItem('token')
@@ -68,7 +68,7 @@ const actions = {
     const data = new FormData()
     data.append('language', currentLanguage.value.identifier)
 
-    const resp = await fetch((window.location.href.indexOf('localhost') >= 0 ? process.env.VUE_APP_DAM_URL : window.OPENPIM_SERVER_URL + '/') + 'import-config-test/' + importsConfig.id, {
+    const resp = await fetch((window.location.href.indexOf('localhost') >= 0 ? process.env.VUE_APP_DAM_URL : process.env.VUE_APP_SERVER_URL + '/') + 'import-config-test/' + importsConfig.id, {
       method: 'POST',
       headers: {
         'x-token': localStorage.getItem('token')
@@ -81,7 +81,7 @@ const actions = {
     const data = new FormData()
     data.append('file', file)
 
-    const resp = await fetch((window.location.href.indexOf('localhost') >= 0 ? process.env.VUE_APP_DAM_URL : window.OPENPIM_SERVER_URL + '/') + 'import-config-template-upload', {
+    const resp = await fetch((window.location.href.indexOf('localhost') >= 0 ? process.env.VUE_APP_DAM_URL : process.env.VUE_APP_SERVER_URL + '/') + 'import-config-template-upload', {
       method: 'POST',
       headers: {
         'x-token': localStorage.getItem('token')
@@ -103,7 +103,7 @@ const actions = {
     data.append('mappingId', id)
     data.append('language', currentLanguage.value.identifier)
 
-    const resp = await fetch((window.location.href.indexOf('localhost') >= 0 ? process.env.VUE_APP_DAM_URL : window.OPENPIM_SERVER_URL + '/') + 'import-upload', {
+    const resp = await fetch((window.location.href.indexOf('localhost') >= 0 ? process.env.VUE_APP_DAM_URL : process.env.VUE_APP_SERVER_URL + '/') + 'import-upload', {
       method: 'POST',
       headers: {
         'x-token': localStorage.getItem('token')

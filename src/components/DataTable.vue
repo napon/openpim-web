@@ -942,7 +942,7 @@ export default {
         const tmp = items.find(el => parseInt(el.id) === parseInt(value))
         if (tmp) data = [tmp]
       }
-      const damUrl = window.location.href.indexOf('localhost') >= 0 ? process.env.VUE_APP_DAM_URL : window.OPENPIM_SERVER_URL + '/'
+      const damUrl = window.location.href.indexOf('localhost') >= 0 ? process.env.VUE_APP_DAM_URL : process.env.VUE_APP_SERVER_URL + '/'
       data = data.map(el => ({
         identifier: el.identifier,
         imageUrl: el.values.__imagedata && el.values.__imagedata.id ? damUrl + 'asset/' + el.values.__imagedata.id + '/thumb?token=' + localStorage.getItem('token') : null,
@@ -1613,7 +1613,7 @@ export default {
 
       if (arr.length === 0) return
 
-      const damUrl = window.location.href.indexOf('localhost') >= 0 ? process.env.VUE_APP_DAM_URL : window.OPENPIM_SERVER_URL
+      const damUrl = window.location.href.indexOf('localhost') >= 0 ? process.env.VUE_APP_DAM_URL : process.env.VUE_APP_SERVER_URL
       const form = document.createElement('form')
       form.method = 'POST'
 
@@ -2040,7 +2040,7 @@ export default {
       loadingRef,
       editHeaders,
       columnsSelected,
-      damUrl: window.location.href.indexOf('localhost') >= 0 ? process.env.VUE_APP_DAM_URL : window.OPENPIM_SERVER_URL + '/',
+      damUrl: window.location.href.indexOf('localhost') >= 0 ? process.env.VUE_APP_DAM_URL : process.env.VUE_APP_SERVER_URL + '/',
       token: localStorage.getItem('token'),
       getThumbnail,
       exportData,
