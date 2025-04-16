@@ -171,7 +171,7 @@ export default {
       showLog,
       dateFormat,
       DATE_FORMAT: process.env.VUE_APP_DATE_FORMAT,
-      damUrl: window.location.href.indexOf('localhost') >= 0 ? process.env.VUE_APP_DAM_URL : process.env.VUE_APP_SERVER_URL + '/',
+      damUrl: window.location.href.indexOf('localhost') >= 0 ? process.env.VUE_APP_DAM_URL : window.OPENPIM_SERVER_URL + '/',
       token: localStorage.getItem('token')
     }
   }

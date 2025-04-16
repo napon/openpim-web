@@ -236,7 +236,7 @@ const actions = {
     const offset = (options.page - 1) * options.itemsPerPage
     const order = generateSorting(options)
     const includeLog = options.log ? ', log' : ''
-    const data = await serverFetch('query { getExecutions(channelId: "' + channelId + '", offset: ' + offset + ', limit: ' + options.itemsPerPage + ', order: ' + objectToGraphgl(order) + `) {
+    const data = await serverFetch('query { getExecutions(channelId: "' + channelId + '", offset: ' + offset + ', limit: ' + options.itemsPerPage + ', order: ' + objectToGraphgl(order) + `) { 
       count, rows {id, status, startTime, finishTime, storagePath ${includeLog} }}}`)
     return data.getExecutions
   },
@@ -261,7 +261,7 @@ const actions = {
     data.append('file', file)
     data.append('id', id)
 
-    const resp = await fetch((window.location.href.indexOf('localhost') >= 0 ? process.env.VUE_APP_DAM_URL : process.env.VUE_APP_SERVER_URL + '/') + 'xlsx-template-upload', {
+    const resp = await fetch((window.location.href.indexOf('localhost') >= 0 ? process.env.VUE_APP_DAM_URL : window.OPENPIM_SERVER_URL + '/') + 'xlsx-template-upload', {
       method: 'POST',
       headers: {
         'x-token': localStorage.getItem('token')
