@@ -920,7 +920,7 @@ export default {
 
       availableItemsForRelationAttr.value = data.getItemsForRelationAttribute.map(el => {
         const text = getDisplayValue(el, displayValueOption, displayAttr, lovData)
-        const damUrl = window.location.href.indexOf('localhost') >= 0 ? process.env.VUE_APP_DAM_URL : window.OPENPIM_SERVER_URL + '/'
+        const damUrl = window.location.href.indexOf('localhost') >= 0 ? process.env.VUE_APP_DAM_URL : process.env.VUE_APP_DAM_URL + '/'
         const imageUrl = el.values.__imagedata && el.values.__imagedata.id ? damUrl + 'asset/' + el.values.__imagedata.id + '/thumb?token=' + localStorage.getItem('token') : null
         return { identifier: el.identifier, value: el.id, text, imageUrl }
       })

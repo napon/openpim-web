@@ -749,7 +749,7 @@ export default {
 
       const routePath = `template/${template.id}/${itemRef.value.id}`
       const token = localStorage.getItem('token')
-      const damUrl = window.location.href.indexOf('localhost') >= 0 ? process.env.VUE_APP_DAM_URL : window.OPENPIM_SERVER_URL
+      const damUrl = window.location.href.indexOf('localhost') >= 0 ? process.env.VUE_APP_DAM_URL : process.env.VUE_APP_DAM_URL
       const fullPath = isDirectUrl
         ? routePath
         : `${routePath}?token=${token}`
@@ -1540,7 +1540,7 @@ export default {
       getAttrRange,
       getTableRowsCount,
       mainImage,
-      damUrl: window.location.href.indexOf('localhost') >= 0 ? process.env.VUE_APP_DAM_URL : window.OPENPIM_SERVER_URL + '/',
+      damUrl: window.location.href.indexOf('localhost') >= 0 ? process.env.VUE_APP_DAM_URL : process.env.VUE_APP_DAM_URL + '/',
       token: localStorage.getItem('token'),
       loadDataFunction,
       itemsDataTableRef,

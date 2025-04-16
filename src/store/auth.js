@@ -5,7 +5,7 @@ const authList = {
   authOpenID: async (id, uri) => {
     let data = null
     try {
-      const serverUrl = window.location.href.indexOf('localhost') >= 0 ? process.env.VUE_APP_SERVER_URL : window.OPENPIM_SERVER_URL + '/graphql'
+      const serverUrl = window.location.href.indexOf('localhost') >= 0 ? process.env.VUE_APP_SERVER_URL : process.env.VUE_APP_DAM_URL + '/graphql'
       const resp = await fetch(serverUrl, {
         method: 'POST',
         headers: {
@@ -26,7 +26,7 @@ const authList = {
   callback: async (id, uri, rederectURI) => {
     let data = null
     try {
-      const serverUrl = window.location.href.indexOf('localhost') >= 0 ? process.env.VUE_APP_SERVER_URL : window.OPENPIM_SERVER_URL + '/graphql'
+      const serverUrl = window.location.href.indexOf('localhost') >= 0 ? process.env.VUE_APP_SERVER_URL : process.env.VUE_APP_DAM_URL + '/graphql'
       const resp = await fetch(serverUrl, {
         method: 'POST',
         headers: {

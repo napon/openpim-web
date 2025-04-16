@@ -797,7 +797,7 @@ export default {
       relationsRefreshKeys,
       required: value => !!value || i18n.t('ItemRelationsList.Required'),
       pageSizePositive: value => parseInt(value) > 1 || i18n.t('ItemRelationsList.MustBePositive'),
-      damUrl: window.location.href.indexOf('localhost') >= 0 ? process.env.VUE_APP_DAM_URL : window.OPENPIM_SERVER_URL + '/',
+      damUrl: window.location.href.indexOf('localhost') >= 0 ? process.env.VUE_APP_DAM_URL : process.env.VUE_APP_DAM_URL + '/',
       token: localStorage.getItem('token'),
       dateFormat,
       DATE_FORMAT: process.env.VUE_APP_DATE_FORMAT
