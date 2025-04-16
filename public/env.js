@@ -1,1 +1,1 @@
-process.env.VUE_APP_DAM_URL = ''
+window.OPENPIM_SERVER_URL = ''
